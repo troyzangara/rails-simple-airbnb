@@ -1,0 +1,65 @@
+<%# 1. The Banner Map (Placeholder for now) %>
+<div class="banner-map" style="background-image: url('<%= @flat.picture_url %>'); height: 400px; background-size: cover; background-position: center;">
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+
+    <%# --- LEFT COLUMN (8 units wide) --- %>
+    <div class="col-8">
+
+      <%# 1. Title & Action Buttons Card %>
+      <div class="card p-4 shadow-sm mb-4">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h1><%= @flat.name %></h1>
+            <p class="text-muted"><%= @flat.address %></p>
+          </div>
+          <div style="min-width: 150px;">
+            <%= link_to "Edit this flat", edit_flat_path(@flat), class: "btn btn-outline-warning w-100 mb-2" %>
+            <%= link_to "Remove", flat_path(@flat),
+                class: "btn btn-outline-danger w-100",
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          </div>
+        </div>
+      </div>
+
+      <%# 2. Description Card %>
+      <div class="card p-4 shadow-sm mb-4">
+        <h3>A bit more about this flat...</h3>
+        <p><%= @flat.description %></p>
+      </div>
+
+      <%# 3. Details Card %>
+      <div class="card p-4 shadow-sm mb-4">
+        <h3>Details</h3>
+        <div class="d-flex">
+          <div class="me-4"><i class="fa-solid fa-users"></i> <%= @flat.number_of_guests %> guests</div>
+          <div><i class="fa-solid fa-euro-sign"></i> <%= @flat.price_per_night %> per night</div>
+        </div>
+      </div>
+
+    </div> <%# This CLOSES the col-8 %>
+
+
+    <%# --- RIGHT COLUMN (4 units wide) --- %>
+    <div class="col-4">
+      <div class="card p-4 shadow-sm mb-4">
+        <h5>Book this place!</h5>
+        <%# ... form code ... %>
+        <button class="btn btn-success w-100">Book</button>
+      </div>
+
+      <div class="card p-4 shadow-sm">
+        <div class="d-flex justify-content-between">
+          <strong>Share</strong>
+          <div>
+            <i class="fa-brands fa-facebook mx-1"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+          </div>
+        </div>
+      </div>
+    </div> <%# This CLOSES the col-4 %>
+
+  </div> <%# This CLOSES the main row %>
+</div>

@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <% if @query %>
+    <p class="text-muted">
+      You searched for <strong>"<%= @query %>"</strong>.
+      We found <%= @flats.count %> <%= "flat".pluralize(@flats.count) %>.
+    </p>
+  <% else %>
+    <h1>All our Flats</h1>
+  <% end %>
+  <hr>
+
+  <div class="row">
+    <% @flats.each do |flat| %>
+      <%# 1. The Column (determines horizontal width) %>
+      <div class="col-12 col-md-4 mb-4">
+
+        <%# 2. THE Card (only one card per flat) %>
+        <div class="card h-100 shadow-sm">
+
+          <%# 3. The Image %>
+          <img src="<%= flat.picture_url.present? ? flat.picture_url : 'https://images.unsplash.com/photo-1570640524401-7be7b14c7079?q=80&w=3019&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' %>"
+               class="card-img-top" alt="flat image" style="height: 200px; object-fit: cover;">
+
+          <%# 4. The Content %>
+          <div class="card-body">
+            <h5 class="card-title"><%= flat.name %></h5>
+            <p class="card-text text-muted"><%= flat.address %></p>
+
+            <div class="d-flex border-top pt-3 mt-3">
+              <div class="me-4">
+                <i class="fa-solid fa-users"></i> <%= flat.number_of_guests %>
+              </div>
+              <div>
+                <i class="fa-solid fa-euro-sign"></i> <%= flat.price_per_night %>
+              </div>
+            </div>
+          </div>
+
+          <%# 5. The Actions %>
+          <div class="card-footer bg-transparent border-top-0 pb-3">
+            <%= link_to "More info", flat_path(flat), class: "text-primary text-decoration-none" %>
+            <%= link_to "Edit", edit_flat_path(flat), class: "text-warning text-decoration-none ms-3" %>
+            <%= link_to "Remove", flat_path(flat),
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                class: "text-danger ms-3 text-decoration-none" %>
+          </div>
+        </div>
+
+      </div> <%# Closes col-md-4 %>
+    <% end %> <%# Closes the loop %>
+  </div> <%# Closes row %>
+</div> <%# Closes container %>

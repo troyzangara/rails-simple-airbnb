@@ -1,0 +1,21 @@
+<%= simple_form_for(flat) do |f| %>
+  <%= f.input :name, placeholder: "Light & Spacious Garden Flat London" %>
+  <%= f.input :address, placeholder: "10 Clifton Gardens London W9 1DT" %>
+  <%= f.input :description %>
+
+  <%# Keep these two side-by-side %>
+  <div class="row">
+    <div class="col-6">
+      <%= f.input :price_per_night, label: "Price per night (£)" %>
+    </div>
+    <div class="col-6">
+      <%= f.input :number_of_guests, label: "Number of guests" %>
+    </div>
+  </div>
+
+  <%# Move this OUTSIDE the row to make it start on the left and use full width %>
+  <%= f.input :picture_url, placeholder: "https://images.unsplash.com/photo-..." %>
+
+  <%= f.button :submit, class: "btn btn-primary mt-3" %>
+  <%= link_to "Cancel", flats_path, class: "btn btn-outline-secondary mt-3 ms-2" %>
+<% end %>
